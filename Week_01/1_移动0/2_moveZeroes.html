@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var moveZeroes = nums => {
+      var j = 0 ;
+      for(var i = 0; i < nums.length; i++){
+        if(nums[i] != 0) {
+          nums[j] = nums[i];
+          if(i != j) {
+            nums[i] = 0;
+          }
+          j++;
+        }
+      }
+      return nums;
+    }
+    var nums = [0,0,1,2,5];
+    console.log(moveZeroes(nums))
+  </script>
+</body>
+</html>

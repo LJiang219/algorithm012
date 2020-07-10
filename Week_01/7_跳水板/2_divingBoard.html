@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跳水板</title>
+</head>
+<body>
+  <script>
+  var divingBoard = function(shorter, longer, k) {
+    if(k === 0) {
+        return []; 
+    }
+    if(shorter === longer) {
+        return [k * shorter];
+    }
+    const res = [];
+    for(let i = 0; i <= k; i++){
+      // k*longer+(shorter-longer)*i
+        // res.push(shorter*i + (k-i) * longer);
+        //从小到大排序
+        res.push(k*shorter+(longer-shorter)*i)
+    }
+    return res;
+};
+console.log(divingBoard(1,1,0))
+  </script>
+</body>
+</html>

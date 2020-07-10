@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三数之和</title>
+</head>
+<body>
+  <script>
+    var threeSum = (nums, target) => {
+      let res = [];
+      for(let i = 0; i < nums.length - 2; i++) {
+        for(let j = i+1; j < nums.length - 1; j++){
+          for(let k = j+1; k < nums.length; k++){
+            if(nums[i] + nums[j] + nums[k] === 0){
+              res.push([nums[i], nums[j], nums[k]])
+            }
+          }
+        }
+      }
+
+      //二维数组去重 ????
+      return res;
+    }
+
+    var nums = [-1, 0, 1, 2, -1, -4];
+    var target = 0;
+    console.log(threeSum(nums, target))
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var rotate = function(nums, k){
+      var len = nums.length;
+      var r = [len];
+      for(var i = 0; i < len; i++) {
+        r[(i + k) % len] = nums[i];
+      }
+      for(var i = 0; i < len; i++){
+        nums[i] = r[i]
+      }
+    }
+  </script>
+</body>
+</html>

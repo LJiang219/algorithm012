@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盛最多水的容器</title>
+</head>
+<body>
+  <script>
+    //方法1
+    var maxArea1 = (height) => {
+      var max = 0;
+      for(var i = 0 ; i < height.length -1 ; ++i){
+        for(var j = i + 1; j < height.length ; ++j){
+          var area = (j - i) * Math.min(height[i], height[j]);
+          max = Math.max(max, area);
+        }
+      }
+      return max;
+    }
+    
+
+    //方法2
+    var maxArea2 = (height) => {
+      var max = 0; 
+      for(var i = 0, j = height.length-1; i < j ; ){
+        var minHeight = height[i] < height[j] ? height[i++] : height[j--];
+        var area = (j - i + 1) * minHeight;
+        max = Math.max(max, area);
+      }
+      return max;
+    }
+    
+    
+    //test
+    var height = [1,8,6,2,5,4,8,3,7];
+    console.log(maxArea2(height))
+  </script>
+</body>
+</html>

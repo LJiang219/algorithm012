@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var twoSum = function(nums, target) {
+    var tmpMap = {}; //存储剩余值的对象, key:剩余值; value: 索引值
+    for(var i = 0; i < nums.length; i++){
+        //在map中找到了这个剩余值
+        if(tmpMap[target-nums[i]] != undefined){
+            return [tmpMap[target-nums[i]], i]
+        }
+        //在tmpMap中没有找到, 则添加当前和对应的索引
+        tmpMap[nums[i]] = i;
+    }
+   
+  };
+
+    console.log(twoSum())
+  </script>
+</body>
+</html>

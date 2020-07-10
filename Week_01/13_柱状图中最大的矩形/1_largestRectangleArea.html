@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var largestRectangleArea = function(heights){
+      var maxArea = 0;
+      var len = heights.length;
+      for(var i = 0;i < len;i++){
+          var left = i;
+          var right = i;
+          while(left >= 0 && heights[left] >= heights[i]){
+              left--;
+          }
+          while(right < len && heights[right] >= heights[i]){
+              right++;
+          }
+          maxArea = Math.max(maxArea,(right - left - 1) * heights[i])
+      }
+      return maxArea;
+
+    }
+
+
+  </script>
+</body>
+</html>

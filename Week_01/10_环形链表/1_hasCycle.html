@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var hasCycle = function(head){
+      if(!head || !head.next){
+        return false;
+      }
+      let fast= head.next.next, slow = head.next;
+      while(fast != slow){
+        if(!fast || !fast.next) return false;
+        fast = fast.next.next;
+        slow = slow.next;
+      } 
+      return true;
+    }
+  </script>
+</body>
+</html>
