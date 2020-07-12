@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var maxSlidingWindow = function(nums, k) {
+        let n = nums.length;
+        if(n == 0) return [];
+        let res = [];
+        for(let i = 0;i < n - k + 1;i++){
+            let max = Number.MIN_SAFE_INTEGER;
+            for(let j = i;j < i + k;j++){
+                max = Math.max(max,nums[j]);
+            }
+            res.push(max);
+        }
+        return res;
+    };
+
+  </script>
+</body>
+</html>

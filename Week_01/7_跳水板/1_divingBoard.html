@@ -8,19 +8,18 @@
 <body>
   <script>
     var divingBoard = function(shorter, longer, k) {
-    
-    if(k == 0){
-        return [];
-    }
-    if(shorter === longer){
-        return [k * shorter];
-    }
-    const res = [];
-    for(var i = 0; i <= k; i++){
-       res.push(shorter * k + (longer-shorter) * i);
-    }
-    return res;
-};
+      if(k == 0) return [];
+      if(shorter == longer) return [k*shorter];
+
+      //i块板子的长度
+      var res = [];
+      for(var i = 0; i <= k ; i++){
+        //从小到大: longer*i + (k-i) * shorter 
+        res.push( k * shorter + (longer - shorter)*i )
+      }
+      return res;
+      
+    };
   </script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //暴力
+    var countSmaller = function(nums) {
+      // var res = [];
+      // var len = nums.length; 
+      // for(var i = 0; i<len; i++) {
+      //     let rArr = nums.shift(i);
+      //     let count = 0;
+      //     for(var j = 0; j < rArr.length; j++){
+      //         if(rArr[j] < nums[i]){
+      //             count++;
+      //         }
+      //     }
+      //     res.push(count)
+      // }
+      // return res;
+
+      var res = [];
+      for(let i = 0; i < nums.length; i++){
+        let count = 0;
+        for( let j = i + 1; j < nums.length; j++) {
+          if(nums[j] < nums[i]) {
+            count++;
+          }
+        }
+        res.push(count)
+      }
+      return res;
+};
+  </script>
+</body>
+</html>

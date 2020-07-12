@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //有误, 不应该使用额外的新数组
+    var removeDuplicates = function(nums) {
+    var tmpMap = {};
+    var res = [];
+    for(var i = 0; i < nums.length; i++) {
+        if(tmpMap[nums[i]] ){
+            return;
+        }else{
+          tmpMap[nums[i]] = 'x';
+          res.push(nums[i])
+        }
+     
+      
+  }
+  return res.length;
+};
+  </script>
+</body>
+</html>

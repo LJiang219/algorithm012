@@ -19,7 +19,7 @@
       if(root === null){
         return false;
       }
-      //结束递归的条件: 判断是否为子节点(左右子节点都为null)
+      //结束递归的条件: 判断是否为子节点(左右子节点都为null), 并且其值是否==sum
       if(root.left === null && root.right === null){
         return root.val === sum;
       }
@@ -30,9 +30,6 @@
       return left || right;
     }
 
-    // var root = [5,4,8,11,null,13,4,7,2,null,null,null,1];
-    // var sum = 22;
-    // console.log(hasPathSum(root, sum))
   </script>
 </body>
 </html>

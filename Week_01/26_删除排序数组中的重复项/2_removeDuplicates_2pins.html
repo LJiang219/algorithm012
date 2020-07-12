@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var removeDuplicates = function(nums) {
+      var res = [];
+      var i = 0; //新数组的下标
+      for(var j = 1; j < nums.length; j++) {
+        if(nums[i] != nums[j]){
+          i++;
+          nums[i] = nums[j];
+        }    
+      }
+      return i+1;
+
+    };
+  </script>
+</body>
+</html>
