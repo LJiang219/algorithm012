@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let topKFrequent = function(nums, k) {
+
+      let map = new Map(), arr = [...new Set(nums)];
+
+      nums.map((num) => {
+          if(map.has(num)) {
+            map.set(num, map.get(num)+1);
+          }else {
+            map.set(num, 1);
+          }
+      })
+      
+      return arr.sort((a, b) => map.get(b) - map.get(a)).slice(0, k);
+    };
+
+    //时间复杂度：O(nlogn)
+
+  </script>
+</body>
+</html>

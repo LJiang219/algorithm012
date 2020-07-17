@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //双指针
+    var intersect = function(nums1, nums2) {
+      nums1.sort((a, b) => a-b);
+      nums2.sort((a, b) => a-b);
+
+      let len1 = nums1.length;
+      let len2 = nums2.length;
+      let res = [];
+
+      let idx1 = 0, idx2 = 0, idx = 0;
+      while( idx1 < len1 && idx2 < len2) {
+        if(nums1[idx1] < nums[idx2]) {
+          idx1++;
+        }else if(nums1[idx1] > nums[idx2]){
+          idx2++;
+        }else{
+          res.push(nums1[idx1]);
+          idx1++;
+          idx2++;
+          idx++;
+        }
+      }
+      
+      return res;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} arr
+    * @param {number} k
+    * @return {number[]}
+    */
+    var getLeastNumbers = function(arr, k) {
+      //排序
+      return arr.sort((a, b) => a-b).slice(0, k)
+    };
+
+    //时间复杂度是O(NlogN)，空间复杂度是O(logN)。
+  </script>
+</body>
+</html>

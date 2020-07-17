@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //递归 (中根遍历: left - mid-right)
+    var inorderTraversal = function(root) {
+      if (root) {
+        return [...inorderTraversal(root.left), root.val, ...inorderTraversal(root.right)]
+      } else {
+        return []
+      }
+    }
+
+  </script>
+</body>
+</html>

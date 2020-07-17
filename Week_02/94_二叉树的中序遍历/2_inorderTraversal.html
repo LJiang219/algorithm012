@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //迭代
+    var inorderTraversal = function(root) {
+      let nums = [];
+      let stack = [];
+
+      while(root || stack.length) {
+        while(root) {
+          stack.push(root);
+          root = root.left;
+        }
+        root = stack.pop();
+        nums.push(root.val);
+        root = root.right;
+      }
+      return nums;
+    }
+
+  </script>
+</body>
+</html>

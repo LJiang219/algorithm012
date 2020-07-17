@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  var numTrees = function(n) {
+    const G = new Array(n + 1).fill(0);
+    G[0] = 1;
+    G[1] = 1;
+
+//G[2] = G[0]*G[1] + G[1]*G[0];
+//G[3] = G[0]*G[2] + G[1]*G[1] + G[2]*G[0]
+    for(let i = 2; i <= n ; i++) {
+      for(let j = 1; j <= i; j++) {
+        G[i] += G[j - 1] * G[i - j];
+      }
+    }
+    return G[n];
+  };
+  </script>
+</body>
+</html>

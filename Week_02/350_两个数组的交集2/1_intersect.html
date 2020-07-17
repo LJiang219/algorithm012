@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var intersect = function(nums1, nums2) {
+      let hash = new Map();
+      let res = [];
+
+      for(let i = 0; i < nums1.length; i++){
+        //将值存储在hash中, 计算出现的次数
+        if(hash.has(nums1[i])) {
+          hash.set(nums1[i], hash.get(nums1[i]) + 1); 
+        }else{
+          hash.set(nums1[i], 1); 
+        }
+        
+      }
+
+      for(let i = 0; i < nums2.length; i++) {
+        let temp = nums2[i];
+        let hashKey = hash.get(temp);
+        if(hash.has(temp)){
+          res.push(temp); 
+          if(hashKey > 1) {
+            hash.set(temp, hashKey - 1); 
+          }else{
+            hash.delete(temp)
+          }
+        }
+      
+      }
+
+      return res;
+    }
+  </script>
+</body>
+</html>
