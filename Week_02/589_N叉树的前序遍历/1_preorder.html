@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /**
+    * @param {Node} root
+    * @return {number[]}
+    */
+    var preorder = function(root) {
+      const res = [];
+      //先遍历root, 再遍历children
+      function traversal (root) {
+        if (root !== null) {
+          res.push(root.val);
+          root.children.forEach(child => traversal(child));
+        }
+      }
+      traversal(root);
+      return res;
+    };
+  </script>
+</body>
+</html>

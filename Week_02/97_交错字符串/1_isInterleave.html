@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script>
+    var isInterleave = function (s1, s2, s3) {
+
+      if (s1.length + s2.length !== s3.length) {
+          return false;
+      }
+      // 添加空字符，避免 i - 1 及 j - 1 出现负数
+      s1 = ' ' + s1;
+      s2 = ' ' + s2;
+      s3 = ' ' + s3;
+
+      const n = s1.length,
+          m = s2.length,
+          l = s3.length;
+
+      // dp[i][j] 代表 s1 前 i 位及 s2 前 j 位能否交错组合为 s3 的 i + j 位。
+      const dp = [...new Array(n)].map(() => [...new Array(m)]);
+      // 初始化状态
+      dp[0][0] = true;
+
+      for (let i = 0; i < n; i++) {
+          for (let j = 0; j < m; j++) {
+              if (i === 0 && j === 0) {
+                  continue;
+              }
+              if (s1[i] === s3[i + j]) {
+                  dp[i][j] = dp[i - 1][j];
+              }
+              if (s2[j] === s3[i + j]) {
+                  dp[i][j] = dp[i][j] || dp[i][j - 1];
+              }
+          }
+      }
+
+      return dp[n - 1][m - 1] || false;
+    };
+    </script>
+</body>
+</html>

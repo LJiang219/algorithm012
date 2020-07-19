@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /**
+  * @param {Node} root
+  * @return {number[][]}
+  */
+  var levelOrder = function(root) {
+  if (!root) return [];
+
+  let queue = [root];
+  let ans = [];
+  //以层为单位遍历整棵树
+  while(queue.length) {
+    let level = [];
+    let len = queue.length;
+    //迭代处理当前层的每个节点
+    for (let i = 0; i < len; i++) {
+        let current = queue.shift(); 
+        level.push(current.val);
+        if (current.children && current.children.length > 0) {
+            queue.push(...current.children);// 将当前层的children压入队列
+        }
+    }
+    ans.push(level);
+  }
+  return ans;
+};
+</script>
+</body>
+</html>

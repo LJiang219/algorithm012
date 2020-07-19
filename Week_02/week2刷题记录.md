@@ -462,4 +462,169 @@ var getLeastNumbers = function(arr, k) {
   + 返回 res 最后一个数字
 
 
+# 62.不同路径 [动态规划][经典呀]
+1. https://leetcode-cn.com/problems/unique-paths/
+2. 思路:
++ 动态规划:
++ <img src="./images/dtgh1.jpg" width="300" >
++ <img src="./images/dtgh2.jpg" width="300" >
++ 说明:
+  - 在左边的图里，每个位置上的数字代表了到该点的路径数量。
+  - 显然第一列为1，第一行为1.因为仅仅在一行或者一列中移动 只有一种路径.
+  - 每个位置可以由它上方或者由它左方到达。
+  - 每个位置上的值，也就是该位置的路径数目 = 其上方数字 + 其左方数字
+  - 观察这个二维矩阵的规律，不难发现可以在一维数组中进行更新迭代完成。
+  - 使用一个vector进行更新就行。更新过程为：vec[i] = vec[i-1] + vec[i]
 
+3. 代码:
+```js
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(m, n) {
+    var cur = new Array(n).fill(1);
+    for(var i = 1;i < m;i++){
+        for(var r = 1;r < n;r++){
+            cur[r] = cur[r-1]+cur[r];
+        }
+    }
+    return cur[n-1];
+};
+
+```
+
+
+# 97. 交错字符串 [每日一题][动态规划]
+1. https://leetcode-cn.com/problems/interleaving-string/
+2. 题目:
++ 给定三个字符串 s1, s2, s3, 验证 s3 是否是由 s1 和 s2 交错组成的。
+```
+输入: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+输出: true
+
+输入: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc"
+输出: false
+```
+3. 思路:
++ 动态规划:
+这道题一看到题目，我们应该就要反应过来动态规划能够发挥作用，如果s1的前i个字符和s2的前j个字符能够交错组成s3的前（i+j）个字符，而且s3的第（i+j+1）个字符恰好又是和s1的第（i+1)个字符 或者 s2的第（j+1）个字符 相同，那么岂不是可以顺利推进了？！
+这道题便迎刃而解。
+定义dp数组 + 初始化 + 递推
+常规操作解决困难题。
+
++ 
+<img src="./images/dtgh.png" width="300">
+
+
+# 83. 删除排序链表中的重复元素 
+1. https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/
+2. 题目: 
+给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+3. 示例: 
+```
+输入: 1->1->2->3->3
+输出: 1->2->3
+```
+4. 思路: 
++ 排好序的，相同元素只会紧挨着
++ 相等就删除，不相等，指针移
++ 为什么最后返回head, 而不是cur: 
+    head是头指针, 是不会发生变动的，current是临时指针，对链表的操作就是操作current
+
+5. 代码片段:
+```j
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var deleteDuplicates = function(head) {
+    var cur = head;
+    while(cur && cur.next) {
+        if(cur.val == cur.next.val) {
+            cur.next = cur.next.next;
+        } else {
+            cur = cur.next;
+        }
+    }
+    return head;
+};
+
+```
+
+5. 刷题记录
+
+|  时间   | 次数  | 备注  | 
+| :---- | :----: | :---- |
+| 07.19  |   1  | 遍历链表节点, 删除相同的值
+
+# 312. 戳气球 [每日一题] (太难 , 待续)
+1. https://leetcode-cn.com/problems/burst-balloons/
+
+
+# 589. N叉树的前序遍历 [递归]
+1. https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+2. 题目: 给定一个 N 叉树，返回其节点值的前序遍历。
+3. 代码: 
+```js
+var preorder = function(root) {
+  const res = [];
+  // 先遍历根 再依次遍历孩子
+  function traversal (root) {
+      if (root !== null) {
+      res.push(root.val);
+      root.children.forEach(child => traversal(child));
+    }
+  }
+  traversal(root);
+  return res;
+};
+```
+4. 刷题记录
+
+|  时间   | 次数  | 备注  | 
+| :---- | :----: | :---- |
+| 07.19  |   1  | 递归
+
+# 429. N叉树的层序遍历 
+1. https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+2. 题目: 给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。
+3. 思路:
++ 使用 队列(queue, first in first out) 进行 [广度优先搜索]
+  - 构筑一个queue 列表,其中每个 queue 是 树中一行的值. 行应该按从上到下的顺序排列. 
+  - 从根节点开始遍历树. 
+  - 向下搜索最近的根节点的节点
++ 注意: 栈 stack 应用于 [广度优先搜索]
+
+4. 代码:
+``` js
+ 
+var levelOrder = function(root) {
+  if (!root) return [];
+
+  let queue = [root];
+  let ans = [];
+  //以层为单位遍历整棵树
+  while(queue.length) {
+    let level = [];
+    let len = queue.length;
+    //迭代处理当前层的每个节点
+    for (let i = 0; i < len; i++) {
+        let current = queue.shift(); 
+        level.push(current.val);
+        if (current.children && current.children.length > 0) {
+            queue.push(...current.children);// 将当前层的children压入队列
+        }
+    }
+    ans.push(level);
+  }
+  return ans;
+};
+```
+
+5. 刷题记录
+
+|  时间   | 次数  | 备注  | 
+| :---- | :----: | :---- |
+| 07.19  |   1  | 广度优先搜索
