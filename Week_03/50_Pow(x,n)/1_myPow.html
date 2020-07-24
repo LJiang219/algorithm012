@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number} x
+    * @param {number} n
+    * @return {number}
+    */
+    var myPow = function(x, n) {
+      if(n === 0) return 1;  // n=0直接返回1
+      if(n < 0){   				//n<0时 x的n次方等于1除以x的-n次方分
+        return 1 / myPow(x, -n)
+      }
+      // n是奇数 myPow(x, n-1) * x , n是偶数 myPow(x*x, n/2)
+      return n % 2 ? x * myPow(x, n-1) : myPow(x*x,n/2)
+
+    };
+  </script>
+</body>
+</html>

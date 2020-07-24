@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+ var subsets = function(nums) {
+    let n = nums.length;
+    let tmpPath = [];
+    let res = [];
+
+    let backtrack = (tmpPath,start) => {
+      res.push(tmpPath);
+      for(let i = start; i < n; i++){
+        tmpPath.push(nums[i]);
+        // console.log(tmpPath)
+        backtrack([...tmpPath],i+1); 
+        //i+1=n后, 结束backtrack, 执行pop(), 再次进入for
+        tmpPath.pop();
+      } 
+    }
+    backtrack(tmpPath,0);
+    return res;
+
+  };
+
+    //test
+    var nums = [1,2,3];
+    console.log(subsets(nums))
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //iteration 
+    var subsets = function(nums) {
+      let res = [[]];
+      for(let i = 0; i < nums.length; i++) {
+        let len = res.length;
+        for(let j = 0; j < len; j++){
+          res.push([...res[j], nums[i]])
+        }
+      }
+      return res;
+    }
+  </script>
+</body>
+</html>

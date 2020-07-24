@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  /**
+    * @param {number[]} preorder
+    * @param {number[]} inorder
+    * @return {TreeNode}
+  */
+  var buildTree = function(preorder, inorder) {
+    var preLen = preorder.length;
+    var inLen = inorder.length;
+    if(preLen !== inLen) {
+      return null;
+    }
+
+    //在中序遍历中, 找到 在中序数组中根节点的位置
+    var map = {};// {key(root值) : 在中序数组的位置}
+    for(var i=0; i < inLen; i++) {
+      map[inorder[i]] = i;
+    }
+    //初始状态, x是中序数组中根的位置(需要在map中遍历得到)
+    //pre: root 0,  leftTree: 1~x;  rightTree: x+1 ~ len
+    //in: leftTree, 0~inRootIndex;  根(inRootindex) map[pre[0]];  rightTree: inRootIndex+1 ~ len
+    return buildSubTree(preorder, 0, preLen-1, inorder, 0, inLen-1, map)
+
+  };
+  
+
+  /**
+  * @param: preorder 前序遍历
+  * @param: preLeft 前序遍历左边界
+  * @param: preRight 前序遍历右边界
+  * @param: inorder 中序遍历
+  * @param: inLeft 中序遍历左边界
+  * @param: inRight 中序遍历右边界
+  * @param: map 中序遍历映射
+  */
+  function buildSubTree (preorder, preLeft, preRight, inorder, inLeft, inRight, map) {
+    //结束递归:
+    if(preLeft > preRight || inLeft > inRight) {
+      return null;
+    }
+
+    var treeNode = {};
+    //根节点: preorder中根节点的值preorder[0]
+    var inRootIndex = map[preorder[preLeft]];
+
+    //根据inRootIndex值, 找到preorder中的左子树的最后一位索引值x
+    // 因为: [x - preLeft] = [inRootIndex - inLeft]
+    var x = inRootIndex + preLeft - inLeft;
+    treeNode.val = preorder[preLeft];
+    //分别找到 左右子树的startIndex, endIndex
+    treeNode.left = buildSubTree(preorder, preLeft+1, x, inorder, inLeft, inRootIndex-1, map);
+    treeNode.right = buildSubTree(preorder, x+1, preRight, inorder, inRootIndex+1, inRight, map);
+    console.log(treeNode)
+    return treeNode;
+  }
+
+  </script>
+</body>
+</html>

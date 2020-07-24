@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    var generateParenthesis = function(n) {
+      var res = [];
+      _help(0, 0, n, "");
+      
+      function _help(left, right, n, s) {
+        if(left == n && right == n) {
+          res.push(s);
+          // console.log(s)
+          return;
+        }
+        if(left < n) {
+          _help(left+1, right, n, s + "(");
+        }
+        if(left > right) {
+          _help(left, right+1, n, s + ")");
+        }
+
+      }
+  
+      return res;
+    };
+
+   
+  </script>
+</body>
+</html>

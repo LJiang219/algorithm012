@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //摩尔投票算法 
+    //参考 https://www.jianshu.com/p/696363f3774c
+    //Robert S. Boyer和J Strother Moore的名字命名
+    var majorityElement = function(nums) {
+      var candidate = 0;
+      var cnt = 0 ; // +1 或者 -1 所得计数
+      for(let i = 0 ; i < nums.length; i++) {
+        if(cnt == 0) {
+          candidate = nums[i];
+          // cnt = 1;
+        }
+        // 遇见相同的加1, 不同的就减1
+        cnt += (candidate == nums[i]) ? +1 : -1;
+      } 
+      return candidate;
+    }
+
+  
+
+    //test
+    var nums = [3, 2, 3];
+    console.log(majorityElement(nums))
+  </script>
+</body>
+</html>

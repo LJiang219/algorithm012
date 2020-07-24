@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var twoSum = function(numbers, target) {
+      let left = 0, right =numbers.length -1;
+      //从小到大的有序数组
+      while(left  < right) {
+        let sum = numbers[left] + numbers[right];
+        if(sum > target) {
+          right--;
+        }else if(sum < target) {
+          left++
+        }else if(sum === target){
+          return [left+1, right+1]
+        }
+      }
+      return [-1, -1]
+    
+    }
+  </script>
+</body>
+</html>

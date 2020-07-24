@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    //重复的子问题: 当前位置上添加"("或者")"
+    // 先生成所有的括号组合
+    var generateParenthesis = function(n) {
+      var res = [];
+      _help(0, 2*n, "");
+
+      return res;
+    };
+
+    function _help(level, max, s) {
+      if(level >= max) {
+        res.push(s);
+        return ;
+      }
+
+      _help(level+1, max, s + "(");
+      _help(level+1, max, s + ")");
+    }
+  </script>
+</body>
+</html>

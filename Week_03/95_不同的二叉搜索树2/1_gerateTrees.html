@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val, left, right) {
+    *     this.val = (val===undefined ? 0 : val)
+    *     this.left = (left===undefined ? null : left)
+    *     this.right = (right===undefined ? null : right)
+    * }
+    */
+    /**
+    * @param {number} n
+    * @return {TreeNode[]}
+    */
+    var generateTrees = function(n) {
+
+      //定义 buildTree()函数 表示当前值的集合为 [start, end]
+      function buildTree(start, end) {
+        let ans = [];
+        //结束递归条件
+        if (start > end) return [null];
+
+        //枚举[start, end]中的值i 为当前二叉搜索树的根
+        //序列划分为 [start, i-1] 和 [i+1, end]
+        for (let i = start; i <= end; i++) {
+          //获得所有可行的左子树集合
+          let leftNodes = buildTree(start, i - 1); 
+          //获得所有可行的右子树集合
+          let rightNodes = buildTree(i + 1, end);
+
+          //从左子树集合中选出一棵左子树, 从右子树集合中选出一棵右子树, 拼接到根节点上
+          for (const leftNode of leftNodes) {
+            for (const rightNode of rightNodes) {
+              let cur = new TreeNode(i);
+              cur.left = leftNode;
+              cur.right = rightNode;
+              ans.push(cur);
+            }
+          }
+        }
+        return ans;
+      }
+      if (n === 0) return [];
+      return buildTree(1, n);
+
+    };
+  </script>
+</body>
+</html>

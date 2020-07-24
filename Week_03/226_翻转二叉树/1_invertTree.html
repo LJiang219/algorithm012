@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //递归: 前序遍历
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val) {
+    *     this.val = val;
+    *     this.left = this.right = null;
+    * }
+    */
+    /**
+    * @param {TreeNode} root
+    * @return {TreeNode}
+    */
+    var invertTree = function(root) {
+      //终止递归条件
+      if(root === null) return null;
+
+      //交换当前节点
+      // let tmp = root.right;
+      // root.right = root.left;
+      // root.left = tmp;
+      // //递归子节点
+      // invertTree(root.right);
+      // invertTree(root.left);
+
+      // let right = invertTree(root.right);
+      // let left = invertTree(root.left);
+      // root.left = right;
+      // root.right = left;
+
+//可以有
+      [root.left,root.right] = [invertTree(root.right),invertTree(root.left)];
+
+      return root;
+
+    };
+  </script>
+</body>
+</html>

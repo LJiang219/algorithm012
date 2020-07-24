@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //排序
+    var majorityElement = function(nums) {
+      nums.sort((a,b) => a-b);
+      return nums(Math.floor(nums.length / 2));
+    }
+
+  
+    //test
+    var nums = [3, 2, 3];
+    console.log(majorityElement(nums))
+  </script>
+</body>
+</html>

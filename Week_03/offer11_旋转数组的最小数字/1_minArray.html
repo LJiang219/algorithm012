@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} numbers
+    * @return {number}
+    */
+    var minArray = function(numbers) {
+      let left = 0;
+      let right = nums.length - 1;
+      while (left < right) {
+        const mid = left + right >>> 1;
+        if (nums[mid] > nums[right]) {
+          left = mid + 1;
+        } else if (nums[mid] == nums[right]) {
+          right--;
+        } else {
+          right = mid;
+        }
+      }
+      return nums[left];
+
+    };
+  </script>
+</body>
+</html>

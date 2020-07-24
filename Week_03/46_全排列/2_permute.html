@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    /**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+  let res = [];
+  let path = [];
+
+
+  function _helper( path) {
+      if(path.length === nums.length) {
+          res.push(path);
+          return ;
+      }
+
+      for(let i = 0; i < nums.length; i++) {
+          //如果path中已经存在当前数字，则不推入path，继续考察下一个数字
+          if(path.includes(nums[i])) continue;
+          path.push(nums[i]);
+          _helper([...path]);
+          path.pop();
+      }
+  }
+
+  _helper(path)
+  return res;
+    
+};
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var twoSum = function(numbers, target) {
+      var map = {};
+      var res = [];
+      for(let i = 0; i < numbers.length; i++) {
+          if(map[target - numbers[i]] != undefined) {
+              return [map[target - numbers[i]]+1, i+1]
+          }
+          map[numbers[i]] = i;
+
+      } 
+    
+    }
+  </script>
+</body>
+</html>

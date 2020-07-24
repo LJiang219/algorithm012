@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val) {
+    *     this.val = val;
+    *     this.left = this.right = null;
+    * }
+    */
+    /**
+    * @param {TreeNode} root
+    * @param {TreeNode} pre 当前节点值的下限
+    * @param {TreeNode} next 当前节点值的上限
+    * @return {boolean}
+    */
+
+    //递归: left < right
+    const helper = (root, lower, upper) => {
+      if(root == null) return true;
+      if(root.val <= lower || root.val >= upper) return false;
+      return helper(root.left, lower, root.val) && helper(root.right, root.val, upper)
+    }
+    var isValidBST = function(root, pre = null, next = null) {
+      return helper(root, -Infinity, +Infinity);
+    };
+  </script>
+</body>
+</html>

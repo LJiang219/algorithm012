@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+  //结束递归条件
+  if(root == null || root == p || root == q){
+      return root;
+  }
+  // 查找左右子树上是否有p节点或者q节点
+  let left = lowestCommonAncestor(root.left, p, q);
+  let right = lowestCommonAncestor(root.right, p, q);
+  //左右子树均能找到, 说明此时p和q在当前root两侧，返回root节点
+  if (left && right) {
+    return root;
+  } else if (left) { //left 找到, right 没有找到, 返回left的查找结果
+    return left;
+  } else if (right) { //right 找到, left 没有找到, 返回right的查找结果
+    return right;
+  }
+  return null; //left 和right 均无 p或q
+};
+  </script>
+</body>
+</html>

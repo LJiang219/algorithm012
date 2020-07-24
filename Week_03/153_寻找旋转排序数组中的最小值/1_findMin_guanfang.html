@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+  //来自官方  
+  var findMin = function(nums) {
+    if(nums.length == 1) return nums[0];
+    
+    var left = 0, right = nums.length -1;
+
+    //e.g. 1<2<3<4<5
+    if(nums[right] > nums[0]) return nums[0];
+
+    //Binaray search way
+    while(left <= right) {
+      //// >> 1 位运算代替 除2 取整 操作
+      // 为什么不写成 mid = (left+right)/2 ,因为考虑到left+right的溢出边界情况
+
+      let mid = parseInt(left + (right - left) / 2);
+
+      if(nums[mid] > nums[mid + 1]) return nums[mid + 1];
+
+      if(nums[mid - 1] > nums[mid]) return nums[mid];
+
+      if(nums[mid] > nums[0]) {
+        left = mid + 1;
+      }else{
+        right = mid - 1;
+      }
+    }
+    return -1;
+  }
+
+//test
+var nums = [3,4,5,1,2]
+console.log(findMin(nums))
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //hashmap
+    var majorityElement = function(nums) {
+      var map = new Map();
+
+      //组装数据 map ([nums[i], 出现的次数])
+      for(let i = 0; i < nums.length; i++) {
+        if(map.has(nums[i])) {
+          map.set(nums[i], map.get(nums[i]) + 1);
+        }else{
+          //将 nums[i]存入map
+          map.set(nums[i], 1)
+        }
+      }
+
+      // console.log(map.entries())
+
+      //遍历
+      for(let item of map.entries()) {
+        // console.log(num); // [3,2], [2,1]
+        if(item[1] > Math.floor(nums.length / 2)) {
+          return item[0];
+        }
+      }
+    }
+
+    //test
+    var nums = [3, 2, 3];
+    console.log(majorityElement(nums))
+  </script>
+</body>
+</html>

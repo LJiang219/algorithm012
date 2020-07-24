@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+/**
+ * @param {number[]} nums, 没有重复值
+ * @return {number}
+ */
+
+  //只比较 mid与right, 获取nums[left]
+  var findMin = function(nums) {
+    var left = 0;
+    var right = nums.length - 1;
+    if(nums[left] <= nums[right]) return nums[left];
+
+    while (left < right) {
+        var mid = (left + right) >> 1; 
+        if (nums[mid] > nums[right]) { 
+          // [left,mid] 连续递增，则在 [mid+1,right] 查找
+            left = mid + 1;
+        } else if(nums[mid] < nums[right]){
+         // [left,mid] 不连续，在 [left,mid] 查找
+            right = mid;
+        }
+    }
+
+    
+    return nums[left];
+
+  };
+  </script>
+</body>
+</html>

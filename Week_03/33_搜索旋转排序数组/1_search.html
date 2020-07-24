@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var search = function(nums, target) {
+      // [6,7,8,1,2,3,4,5]
+      if(nums.length == 0) return -1;
+      if(nums.length == 1) return nums[0] == target ? 0 : -1;
+
+      let left = 0;
+      let right = nums.length - 1;
+
+      while(left <= right ) {
+        let mid = (left+ right) >>1;
+        if(nums[mid] == target) return mid;
+        
+        //mid会将数组分开, 至少有一个有序数组, 先区分哪边为有序数组
+        //先判断左边是否为 有序数组, 如果是有序数组, 再判断target是否存在其中
+        if(nums[left] <= nums[mid]) {
+          //左边为有序数组
+          //判断 target 的值 是否 在 [nums[0], nums[mid]), 改变left 或 right
+          if(nums[left] <= target && target < nums[mid]) {
+            right = mid - 1;
+          }else{
+            //如果target 不在有序数组中, 就在另外的一部分
+            left = mid + 1;
+          }
+        }else {
+          //右边为有序数组
+          // 判断 target 的值 是否在 (nums[mid], nums[right]], 改变left 或 right
+          // 也可以判断 [nums[mid+1], nums[right]]
+          if(nums[mid] < target && target <= nums[right]) {
+            left = mid + 1 ;
+          }else{
+            right = mid - 1;
+          }
+
+        } 
+      }
+      return -1;
+    
+    };
+  </script>
+</body>
+</html>

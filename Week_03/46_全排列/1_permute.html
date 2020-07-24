@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //回溯的模板: push,递归, pop
+    /**
+    * @param {list[]} list 最后的答案, list=[[templist],[templist]...]
+    * @param {tempList[]} tempList 可能的组合
+    * @param {nums[]} nums
+    */
+    function backtrack(list, tempList, nums) {
+      //结束递归: tempList.length = nums.length; 说明已经选满
+      if(tempList.length === nums.length) {
+        return list.push([...tempList]);
+      }
+      //遍历nums数组，
+      //如果tempList中已经存在当前数字，则不推入tempList，继续考察下一个数字
+      //否则，推入tempList，并且递归调用dfs，继续选下一个数字，直到选满
+      //tempList.pop() 做的是回溯，tempList的最后一个选择被撤销，
+      //回到之前的状态，继续下一次迭代，考察上一层的别的选择
+      // 回溯会穷举整个树
+      for(let i = 0; i < nums.length; i++) {
+        if(tempList.includes(nums[i])) continue;
+        tempList.push(nums[i]);
+        backtrack(list, tempList, nums);
+        tempList.pop();
+
+      }
+      
+    }
+    
+    /**
+    * @param {number[]} nums
+    * @return {number[][]}
+    */
+    var permute = function(nums) {
+      const list = [];
+      backtrack(list, [], nums);
+      return list;
+    }
+  </script>
+</body>
+</html>

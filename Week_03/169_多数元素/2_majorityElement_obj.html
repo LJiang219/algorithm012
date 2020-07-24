@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //obj, (undefined || 0)  = 0
+    var majorityElement = function(nums) {
+      let half = nums.length / 2;
+      let obj = {};
+      //obj {nums[i]: 次数}
+      for(let num of nums) {
+        obj[num] = (obj[num] || 0) + 1;
+        if(obj[num] > half) return num;
+      }
+    }
+
+    //test
+    var nums = [3, 2, 3];
+    console.log(majorityElement(nums))
+  </script>
+</body>
+</html>
