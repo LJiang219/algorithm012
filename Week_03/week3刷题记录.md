@@ -39,9 +39,11 @@
 | :---- | :----: | :---- |
 | 07.20  |   1  | hashmap
 | 07.20  |   1  | 双指针
+| 07.25  |   1  | 双指针 (不是二分查找, 和mid没有关系), 如果和大了, 就小点, 如果和小了, 就大点
 
 
-# 爬楼梯 [见week1] [递归]
+# 爬楼梯 [见week1] [递归] [5]
+1. https://leetcode-cn.com/problems/climbing-stairs/
 ```js
  var climbStairs = function (n) {
    if(n <= 2) {
@@ -57,7 +59,7 @@
  }
 ```
 
-# 22. 括号生成 [递归]
+# 22. 括号生成 [回溯]
 1. https://leetcode-cn.com/problems/generate-parentheses/
 2. 题目: 可能的并且 有效的 括号组合 ;
 
@@ -108,9 +110,10 @@
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
 | 07.20  |   1  | 递归
-| 07.20  |   1  | 
+| 07.20  |   1  | 回溯
+| 07.25  |   1  | 回溯
 
-# 226. 翻转二叉树
+# 226. 翻转二叉树 [简单] [交换, 递归]
 1. https://leetcode-cn.com/problems/invert-binary-tree/description/
 2. 示例: 
 ```
@@ -129,6 +132,7 @@
 3. 思路:
 + 终止递归条件: 当前节点为null时返回
 + 交换当前节点的左右节点, 再递归交换当前节点的children
++ 交换流程, 很像 前序遍历, 访问root, 然后left, right
 
 4. 代码片段:[递归, 前序遍历]
 ```js
@@ -153,7 +157,7 @@ invertTree(root.right);
 | :---- | :----: | :---- |
 | 07.20  |   1  | 
 | 07.20  |   1  | 
-
+| 07.25  |   1  | 
 
 # 98. 验证二叉搜索树
 1. https://leetcode-cn.com/problems/validate-binary-search-tree/
@@ -195,9 +199,9 @@ invertTree(root.right);
 
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
-| 07.20  |   1  | 递归
-| 07.20  |   1  | 中序遍历(栈)
-
+| 07.20  |   1  | 递归 O(n)
+| 07.20  |   1  | 中序遍历(栈) O(n)
+| 07.25  |   1  | 递归 
 
 # 104. 二叉树的最大深度
 1. https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
@@ -207,12 +211,17 @@ maxDepth(root) = max(maxDepth(root.left), maxDepth(root.right)) + 1;
 3. 代码: [递归]
 ```js
  var maxDepth = function(root) {
-      if(!root) return 0;
-      const left = maxDepth(root.left);
-      const right = maxDepth(root.right);
-      return Math.max(left, right) +1;
-    };
+  if(!root) return 0; 
+  return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
+};
 ```
+
+4. 刷题记录:
+
+|  时间   | 次数  | 备注  | 
+| :---- | :----: | :---- |
+| 07.21  |   1  | 
+| 07.25  |   1  | 
 
 # 111. 二叉树的最小深度
 1. https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
@@ -237,9 +246,10 @@ var minDepth = function(root) [
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
 | 07.20  |   1  | 递归
+| 07.25  |   1  | 递归
 
 
-# 297. 二叉树的序列化与反序列化
+# 297. 二叉树的序列化与反序列化 
 1. https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
 
 2. 思路和代码: 
@@ -259,7 +269,7 @@ var minDepth = function(root) [
 
 + 反序列化——也是递归
   + 序列化时是前序遍历，所以序列化字符串呈现这样的排列:
-  根|(根|(根|左|右)|(根|左|右))|(根|(根|左|右)|(根|左|右))
+  根 | (根|(根|左|右)|(根|左|右)) | (根|(根|左|右)|(根|左|右))
 
   + <img src="./images/deserialize.png" width="2300">
 
@@ -355,7 +365,7 @@ if (start > end) return [null];
 | 07.21  |   1  | 递归
 
 
-# 236. 二叉树的最近公共祖先 
+# 236. 二叉树的最近公共祖先 [递归] [后根遍历] [条件]
 1. https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/
 2. 题目: 略, 帮2个节点找他们的老爸(最近的)
 
@@ -389,6 +399,7 @@ var lowestCommonAncestor = function(root, p, q) {
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
 | 07.21  |   1  | 递归
+| 07.25  |   1  | 递归(写起来容易, 不太容易想)
 
 # 105. 从前序与中序遍历序列构造二叉树
 1. https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
@@ -456,7 +467,7 @@ function buildSubtree(preorder, preLeft, preRight, inorder, inLeft, inRight, map
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
 | 07.21  |   1  | 递归
-
+| 07.25  |   1  | 递归
 
 *** 
       回溯 
@@ -1055,3 +1066,31 @@ Alice在(0, N)中取的数字, 首先一定满足 N%x==0, N一定被x整除. 任
 
 > N 为奇数的时候 Alice（先手）必败，NN 为偶数的时候 Alice 必胜。
 + 证明见题解
+
+
+# 410. 分割数组的最大值 [每日一题] [题解没有理解] [TODO]
+1. https://leetcode-cn.com/problems/split-array-largest-sum/submissions/
+2. 题目: 
+给定一个非负整数数组和一个整数 m，你需要将这个数组分成 m 个非空的连续子数组。设计一个算法使得这 m 个子数组各自和的最大值最小;
+数组长度 n 满足以下条件:
++ 1 ≤ n ≤ 1000
++ 1 ≤ m ≤ min(50, n);
+
+3. 示例: 
+```
+输入:nums = [7,2,5,10,8],  m = 2;
+输出: 18;
+解释:
+一共有四种方法将nums分割为2个子数组。
+其中最好的方式是将其分为[7,2,5] 和 [10,8]，
+因为此时这两个子数组各自的和的最大值为18，在所有情况中最小。
+```
+
+4. 题解:
++ 子数组的最大值范围，即在区间 [max(nums),sum(nums)] 之中。
++ 令 l = max(nums)，h = sum(nums), mid=(l+h)/2 , (这里???, low, height 为啥不是index的值)
++ 计算数组和最大值不大于mid对应的子数组个数 cnt(这个是关键！???没有理解) 
+  - 如果 cnt>m，说明划分的子数组多了，即我们找到的 mid 偏小，故 l=mid+1；
+  - 否则，说明划分的子数组少了，即 mid 偏大(或者正好就是目标值)，故 h=mid。
+
+

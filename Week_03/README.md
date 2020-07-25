@@ -70,3 +70,9 @@ const recursion = (level, params) =>{
   }
 
 ```
+
+
+# week1的5次刷题记录
+
++ 70. 爬楼梯 [递归] [iteration]
++ 

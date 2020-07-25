@@ -9,7 +9,8 @@
   <script>
     
     //重复的子问题: 当前位置上添加"("或者")"
-    // 先生成所有的括号组合
+    // 先生成所有的括号组合, 没有对"有效括号"做判断 
+    
     var generateParenthesis = function(n) {
       var res = [];
       _help(0, 2*n, "");
