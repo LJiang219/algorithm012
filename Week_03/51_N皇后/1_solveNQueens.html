@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    var solveNQueens = function(n) {
+      var obj={};
+      var add=[];
+      var res=[];
+      var sub=[];
+      trackback(0);
+
+      function trackback(row){
+        if(row==n){
+          var arr=[];
+          for(var i in obj){
+            arr.push('Q'.padStart(obj[i]+1,'.').padEnd(n,'.'))
+          }
+          res.push(arr);
+          return;
+        }
+
+        for(var i=0;i<n;i++){
+          if(Object.values(obj).indexOf(i)!=-1
+          ||add.indexOf(row+i)!=-1
+          ||sub.indexOf(row-i)!=-1){
+            continue
+          }
+            
+          obj[row]=i;
+          add.push(row+i);
+          sub.push(row-i);
+          trackback(row+1);
+          obj[row]=-1;
+          add.pop();
+          sub.pop();
+        }
+      }
+      return res;
+
+    };
+
+  </script>
+  
+</body>
+</html>
