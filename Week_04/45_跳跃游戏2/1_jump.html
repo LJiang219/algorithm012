@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    var jump = function(nums) {
+      var steps = 0;
+      var end = 0;
+      var maxPos = 0; 
+      for (var i = 0; i < nums.length - 1; ++i) {
+        maxPos = Math.max(maxPos, nums[i] + i)
+        if (i == end) {
+            end = maxPos;
+            ++steps;
+        }
+        //一旦新的可抵达区间触碰到nums数组的边界，则直接break，不用对区间的点遍历了
+        if (end >= nums.length - 1) { 
+          break;
+        }
+      }
+      return steps;
+
+    };
+  </script>
+</body>
+</html>

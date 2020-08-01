@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    //二分, 需要辅助函数递归遍历
+    //默认是升序(虽然题目没有说), 先遍历左边,如果找到就返回
+    //左边没有找到, 看是否是中间的值, nums[mid]=mid, 则返回mid
+    //左边, 中间都不是, 遍历右边
+    var findMagicIndex = function(nums) {
+      if(nums == null || nums.length == 0) return 0;
+      return helper(nums, 0, nums.length-1);
+    };
+
+    function helper(nums, left, right) {
+      if(left > right) return -1;
+
+      let mid = (left + right) >>>1;
+
+      let leftRes = helper(nums, left, mid-1);
+      if(leftRes != -1) return leftRes
+      else if(nums[mid] == mid) return mid
+      return helper(nums, mid+1, right);
+      
+    }
+  </script>
+</body>
+</html>

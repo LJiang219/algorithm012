@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * @param {number[]} coins
+     * @param {number} amount
+     * @return {number}
+     */
+    var coinChange = function(coins, amount) {
+      // dp[amount] = Math.min(dp[amount-coins[0]]+1, dp[amount-coins[0]]+1, ....)
+      let dp = new Array(amount+1).fill( amount + 1);
+      dp[0] = 0;
+      for(let i = 1; i <= amount; i++) {
+        for(let coin of coins) {
+          if(i - coin >= 0){
+            dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+          }
+        }
+      }
+
+      return dp[amount] === (amount+1) ? -1 : dp[amount];
+
+    };
+    
+    //test
+    var coins = [1, 2, 5], amount = 11;
+    console.log(coinChange(coins, amount))
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+      var fib = function(N) {
+        // if(N == 1 || N == 2) return 1;
+        // return fib(N - 1) + fib(N - 2);
+
+
+        var dp = new Array(N+1).fill(0);
+        //base case
+        dp[1] = dp[2] = 1;
+        for(let i = 3; i <= N; i++) {
+          dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[N];
+      }
+
+      //test
+      console.log(fib(4))
+  </script>
+</body>
+</html>

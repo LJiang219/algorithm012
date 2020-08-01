@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number} n
+    * @return {number}
+    */
+    //递归, 超时, 但要有这个递归的想法
+    var integerBreak = function(n) {
+      let res = 0;
+      for(let i = 1; i <= n-1; i++) {
+        res = Math.max(res, i*(n-i), i* integerBreak(n-i))
+      }
+      return res;
+    };
+  </script>
+</body>
+</html>

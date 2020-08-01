@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 贪心
+    var coinChange = function(coins, amount) {
+      if(!amount) return 0;
+      coins.sort((a,b) => b - a);
+      let ans = amount+1; 
+      const coinsLen = coins.length;
+
+      coinSubChange(amount, 0, 0);//当前总金额，当前coins的下标，当前面值数
+      return ans === (amount+1) ? -1 : ans;
+
+      function coinSubChange(amount, index, coin) {//
+          if(!amount) {//
+              ans = Math.min(ans, coin);//
+              return;//
+          }
+          if(index === coinsLen) return;//
+          
+          for(let k = parseInt(amount / coins[index]); k >= 0 && k + coin < ans; k--) {//
+            coinSubChange(amount - k * coins[index], index + 1, coin + k);
+          }
+      }
+
+    }
+
+
+  </script>
+</body>
+</html>

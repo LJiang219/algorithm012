@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  /**
+  * @param {number} n
+  * @return {number}
+  */
+  var integerBreak = function(n) {
+    let memo = new Array(n+1);
+
+    const dfs = (n) => {
+      if(memo[n]) return memo[n]; //存储计算过的值
+      let res = 0; 
+      //在for循环中, res不断更新
+      for(let i = 1; i <= n - 1; i++) {
+        res = Math.max(res, i * (n-i), i* dfs(n-i))
+      }
+      return memo[n]= res;
+    };
+
+    return dfs(n);
+  };
+
+  </script>
+</body>
+</html>

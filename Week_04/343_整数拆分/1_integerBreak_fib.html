@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 仿照 斐波那契数列, 自己写的, 通过
+  var integerBreak = function(n) {
+    //备忘录, 初始化为0
+    var memo = new Array(n+1).fill(0); 
+    //进行 带备忘录的递归
+    return _helper(memo, n)
+  }
+  function _helper(memo, n) {
+    //检查是否已经计算过
+    if(memo[n] != 0) return memo[n];
+    let res = 0;//??? 新的res都会被res=0替换吧
+
+    for(let i=1; i <= n-1; i++) {
+      memo[n] = Math.max(memo[n], i * (n-i), i* _helper(memo, n-i))
+    }
+   
+    return memo[n];
+  }
+  
+  </script>
+</body>
+</html>

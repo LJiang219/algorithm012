@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} nums
+    * @return {number}
+    */
+    //如果一个位置能够到达，那么这个位置左侧所有位置都能到达
+    var canJump = function(nums) {
+      let maxPos = 0; //初始化当前能到达的最远位置
+      //如果当前位置能到达, 并且当前位置+跳数>最远位置
+      for(let i = 0; i < nums.length; i++) {
+        if( maxPos < i) {
+          return false;
+        }
+        maxPos = Math.max(maxPos, i + nums[i]); //更新最远能到达位置
+      }
+      return true;
+    };
+  </script>
+</body>
+</html>

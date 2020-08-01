@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * @param {number[]} commands
+     * @param {number[][]} obstacles
+     * @return {number}
+     */
+    var robotSim = function(commands, obstacles) {
+      //x,y方向上的步数
+      var dx = [0,1,0,-1];
+      var dy = [1,0,-1,0];
+      var di = 0;
+      var endX = 0;
+      var endY = 0;
+      var result = 0;
+      var hashObstacle = {};
+      for(var r = 0;r<obstacles.length;r++){
+          hashObstacle[obstacles[r][0]+'-'+obstacles[r][1]] = true;
+      }
+
+      //遍历命令, 处理方向
+      //先考虑没有obstacles, 遍历每一步, 不断更新当前位置=之前的位置+方向信息
+      //有obstacles, 中断, 继续下一个命令
+      //方向信息与 dx, dy 的有趣对应, 旋转90deg, x->y|| y=>x
+      for(var s = 0; s < commands.length;s++){
+        if(commands[s] == -2){
+            di = (di + 3) % 4;
+        }else if(commands[s] == -1){
+          di = (di + 1) % 4; 
+        }else{
+          // 每次走一步
+          for(var z = 1; z <= commands[s]; z++){
+            var nextX = endX + dx[di];
+            var nextY = endY + dy[di];
+            // 判断下一步是否为障碍物, 有障碍物,继续走; 没有则进行下个命令
+            if(hashObstacle[nextX+'-'+nextY]){
+                break;
+            }
+            endX = nextX;
+            endY = nextY;
+            result = Math.max(result,endX * endX + endY * endY);
+          }
+          }
+      }
+      return result;
+    };
+
+  </script>
+</body>
+</html>

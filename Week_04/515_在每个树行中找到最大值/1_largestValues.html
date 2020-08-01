@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+//BFS
+    var largestValues = function(root) {
+      if (!root) return [];
+      let queue = [root]; 
+    //[
+    //   TreeNode {
+    //     val: 1,
+    //     left: TreeNode { val: 3, left: [TreeNode], right: [TreeNode] },
+    //     right: TreeNode { val: 2, left: null, right: [TreeNode] }
+    //   }
+    // ]
+      let ans = [];
+
+      while(queue.length) {
+        let len = queue.length; 
+        let currentMax = -Infinity;
+        while (len--) {
+            let node = queue.shift();
+            currentMax = Math.max(currentMax, node.val);
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+        ans.push(currentMax);
+      }
+      return ans;
+
+    }
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var minMutation = function(start, end, bank) {
+      if(start == end){
+        return 0;
+      }
+      var bankSet = new Map();
+      for(var i = 0; i < bank.length; i++){
+          bankSet.set(bank[i],true);
+      }
+
+      var genes = ['A','C','G','T'];
+      var level = 0;
+      var queue = [[start,0]]; //[[每个字符串, 层级]]
+
+      while(queue.length != 0){
+        var curr = queue.pop();
+        level = curr[1];
+        if(curr[0] == end){
+            return level;
+        }
+        var arrCurr = curr[0];
+        console.log(arrCurrs)
+
+        //遍历当前字符串中的每个字符(比如 "AACCGGTT")
+        for(var i = 0; i < arrCurr.length; i++){
+          //改变"AACCGGTT"每个字符, 每个字符根据数组['A','C','G','T']中的每个字符改变一次
+          //在bankSet中查找匹配变化之后的字符串
+            for(var r = 0; r < genes.length;r++){
+                if(genes[r] != arrCurr[i]){
+                  //比如第一个字符改变后, 变成 "CACCGGTT" || "GACCGGTT" || "TACCGGTT" 
+                    var strCurr = (arrCurr.slice(0,i))+genes[r]+(arrCurr.slice(i+1));
+                    if(bankSet.has(strCurr)){
+                        queue.unshift([strCurr,level+1]);
+                        bankSet.delete(strCurr);
+                    }
+                }
+            }
+        }
+      }
+      return -1;
+
+    }
+  </script>
+</body>
+</html>

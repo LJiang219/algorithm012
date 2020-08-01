@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var lemonadeChange = function(bills) {
+      //收取面值为five 或ten 的纸张数
+      let five = 0, ten = 0, len = bills.length;
+
+      //遍历每个收取的bill, 收取为+, 退还为-
+      for(let bill of bills) {
+        //如果收取5元
+        if(bill === 5) {
+          five++;
+        }else if(bill === 10) {
+          //如果收取10元, 回退5元
+          if(five === 0) {
+            return false;
+          }
+          five--;
+          ten++; 
+        }else if(bill === 20){
+          //收取20, 如果存有10和5元,优先选择找回15, 
+          if(ten>0 && five>0){
+            ten--;
+            five--;
+          }else if(five >= 3){
+            five -= 3;
+          }else{
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    let bills = [5,5,5,10,20];
+    console.log(lemonadeChange(bills))
+  </script>
+</body>
+</html>
