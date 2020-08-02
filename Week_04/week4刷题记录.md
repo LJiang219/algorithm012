@@ -355,23 +355,55 @@ var isPerfectSquare = function(num) {
 
 
 # 74. 搜索二维矩阵 [二维数组] [二分] 
-1.https://leetcode-cn.com/problems/search-a-2d-matrix/
+1. https://leetcode-cn.com/problems/search-a-2d-matrix/
+2. 题目示例:
+  ```
+  输入:
+  matrix = [
+    [1,   3,  5,  7],
+    [10, 11, 16, 20],
+    [23, 30, 34, 50]
+  ]
+  target = 3
+  输出: true
 
-# 题目:
-+ 使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方, 说明：同学们可以将自己的思路、代码写在学习总结中
+  ```
+3. 思路: 
+  > <img src="./">
+  + 初始化左右序号: left = 0 和 right = m*n - 1。
+  + While left < right:
+    - 选取虚数组最中间的序号作为中间序号: pivot_idx = (left + right) / 2。
+    - 该序号对应于原矩阵中的 row = pivot_idx/n 行,  col = pivot_idx % n 列, 由此可以拿到中间元素pivot_element。该元素将虚数组分为两部分。
+    - 比较 pivot_element 与 target 以确定在哪一部分进行进一步查找。
 
-+ 思路:
->  <img src="./images/searchMatrix.png" width="500" >;
+4. 核心代码:
+```js
+while(low <= high){
+  var mid = (low + high) >> 1;
+  var row = parseInt(mid/n);
+  var col = mid % n;
+  var matrixMid = matrix[row][col];
+  
+  if(matrixMid < target){
+      low = mid + 1;
+  }else if(matrixMid > target){
+      high = mid -1;
+  }else if(matrixMid == target){
+      return true;
+  }
+}
+```
 
 5. 刷题记录:
 
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
-| 07.28  |   1  | 二分查找
+| 07.29  |   1  | 二分
+
 
 *** 贪心算法 ***
 
-# 322. 零钱兑换 [] [] 
+# 322. 零钱兑换 [贪心] [动态规划] 
 1. https://leetcode-cn.com/problems/coin-change/
 
 2. 题目:
@@ -640,11 +672,60 @@ const integerBreak = (n) => {
 3. 思路和代码
 + 依次遍历, 找到nums[i] = i, 则返回
 + 二分, 写一个辅助函数递归. 升序, 先left遍历, 判断mid, 都没有则遍历right
+
 4. 刷题记录:
 
 |  时间   | 次数  | 备注  | 
 | :---- | :----: | :---- |
-| 07.301  |   1  | 2
+| 07.31  |   1  | 2
+
+
+
+# 114. 二叉树展开为链表
+1. https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/
+
+2. 题目: 
+给定一个二叉树，原地将它展开为一个单链表。
+  ``` 
+      1
+    / \
+    2   5
+  / \   \
+  3   4   6
+
+  ```
+展开为
+  ```
+  1
+  \
+    2
+    \
+      3
+      \
+        4
+        \
+          5
+          \
+            6
+
+  ```
+
+3. 思路:
+> <img src="./images/tree2link.png" width="500" > 
+  + 右子树转成的单链表，只要获取它的头结点，等左子树生成的链表生成好，接到它的尾节点
+  + 左子树生成的单链表，处理稍微复杂一点
+    - 要获取它的头结点，它要接到根节点的right
+    - 要获取它的尾节点，通过一直找右节点，找到尾节点，供连接
+  + 左子树生成的链表两端都接好后，root.left 要置为 null，不然 root 还拖着个左子树
+
+4. 见html
+
+5. 刷题记录:
+
+|  时间   | 次数  | 备注  | 
+| :---- | :----: | :---- |
+| 08.02  |   1  |  打开冰箱, 把大象放进去, 关上冰箱, 递归
+
 
 
 

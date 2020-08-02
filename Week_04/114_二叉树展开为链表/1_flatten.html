@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const flatten = (root) => {
+      const helper = (root) => {
+        if(root == null) return null;
+        if(root.right){
+          helper(root.right);
+        }
+        if(root.left) { //如果有左子树, 生成单链表然后搬运过去
+          const leftFirst = helper(root.left);//生成单链表, 并获取头结点
+          let leftLast = leftFirst; //
+          if(leftLast.right) { //一直找右节点，获取到单链表的尾节点
+            leftLast = leftLast.right;
+          }
+          leftLast.right = root.right; // 尾节点后面接左子树展平后的单链表
+          root.right = leftFirst;// 根节点的right改成leftFirst
+          root.left = null;// root.left置为null
+        }
+        return root; //返回当前子树转成的单链表
+      }
+      
+      helper(root);
+    }
+  </script>
+</body>
+</html>
