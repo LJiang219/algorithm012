@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //dp - 自底向上 - 降维
+    var minimumTotal = function(triangle) {
+      var dp = new Array(triangle.length+1).fill(0);
+      for(var i = triangle.length -1; i >= 0; i--) {
+        for(var j = 0; j < triangle[i].length; j++) {
+          dp[j] = Math.min(dp[j], dp[j+1]) + triangle[i][j];
+        }
+      }
+      return dp[0];
+    }
+
+    // var dp = new Array(triangle.length+1).fill(0);
+    // for(var i = triangle.length-1;i >= 0;i--){
+    //     for(var j = 0;j < triangle[i].length;j++){
+    //         dp[j] = Math.min(dp[j],dp[j+1]) + triangle[i][j];
+    //     }
+    // }
+    // return dp[0];
+
+  </script>
+</body>
+</html>

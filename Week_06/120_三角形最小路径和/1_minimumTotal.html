@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //自底向上 , 空间优化, 使用一行(好像不太接受)
+    var minimumTotal = function(triangle) {
+     // dp[i][j] 表示从点 (i, j) 到底边的最小路径和。
+      var dp = new Array(triangle.length+1).fill(0);
+     // 从三角形的最后一行开始递推。
+    // 计算 dp[i][j]时，只用到了下一行的 dp[i + 1][j] 和 dp[i + 1][j + 1]。
+    // 因此 dp数组不需要定义 N行，只要定义 1行就可以。
+      for(var i = triangle.length-1; i >= 0; i--){
+          for(var j = 0;j < triangle[i].length;j++){
+              dp[j] = Math.min(dp[j],dp[j+1]) + triangle[i][j];
+          }
+      }
+      return dp[0];
+    }
+//时间复杂度: O(N^2)
+//空间复杂度: O(N)
+  </script>
+</body>
+</html>

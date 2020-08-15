@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number[]} nums
+    * @param {number} k
+    * @return {number[]}
+    */
+    var maxSlidingWindow = function(nums, k) {
+      let n = nums.length;
+      class slideWindow {
+          constructor() {
+              this.data = []; //维护的queue
+          }
+          push(val) {
+              let data = this.data;
+              //push一个新的元素, 要把queue中所有小于新元素的值都去除
+              //保证queue[0]是最大的
+              while(data.length > 0 && data[data.length-1] < val) {
+                  data.pop();
+              }
+              data.push(val)
+          }
+          pop(val) {
+              let data = this.data;
+              //因为在push元素的时候, 已经确保加入的是最大的
+              //只要判断在pop的时候, queue头的值是否是最大
+              //有可能出现相等的情况, 相等的时候就要让位
+              // 或者这样想, 在当前的queue中已经有最大值queue[0]
+              // 我需要知道加入新元素之后的情况
+              // 
+          //  && data[0] === val (data[0] <val不可能; data[0]>val,在push val的时候, 前面小的不再了))
+              if(data.length > 0 && data[0] === val){
+                  data.shift();
+              }
+          }
+          max(){
+              return this.data[0];
+          }
+      }
+
+      //主逻辑
+      let res = [];
+      let windows = new slideWindow();
+      //维护的这个queue,通过添加队尾元素, 移除队头元素,模拟向右移动
+      //保持queue[0]最大
+      for(let i = 0; i < n; i++) {
+          if(i < k-1){
+              windows.push(nums[i]);
+          }else{
+              windows.push(nums[i]);
+              res.push(windows.max());
+              windows.pop(nums[i-k+1])
+          }
+      }
+      return res;
+            
+    };
+  </script>
+</body>
+</html>

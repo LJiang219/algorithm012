@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var rob = function(nums) {
+      const n = nums.length;
+      if (n === 1) return nums[0];
+      return Math.max(
+        robbing(nums.slice(0, n - 1)),
+        robbing(nums.slice(1, n))
+      );
+    }
+
+    function robbing(nums) {
+      let len = nums.length;
+      let dp = new Array(len+1).fill(0);
+      
+      dp[0] = 0;
+      dp[1] = nums[0];
+   
+      for(let i=2; i <= len; i++) {
+        dp[i] = Math.max(dp[i-2]+nums[i-1], dp[i-1]);
+      }
+
+      return dp[len];
+    }
+ 
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var maxProfit = function(prices) {
+      let len = prices.length;
+      let max = prices[0];
+      let dp = new Array(len+1);
+
+      for(let i = 1; i < prices.length; i++) {
+        if(prices[i] - prices[i-1] > 0) {
+          dp[i] = Math.max(dp[i-1]+prices[i], max) ;
+          if(dp[i] > max) {
+            max = dp[i]
+          }
+        }
+      }
+      return max;
+    }
+  </script>
+</body>
+</html>

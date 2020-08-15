@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var change = function(amount, coins) {
+      if (amount === 0) return 1;
+
+      const dp = [Array(amount + 1).fill(1)];
+
+      for (let i = 1; i < amount + 1; i++) {
+        dp[i] = Array(coins.length + 1).fill(0);
+        for (let j = 1; j < coins.length + 1; j++) {
+          if (i - coins[j - 1] >= 0) {
+            // 注意这里是coins[j -1]而不是coins[j]
+            dp[i][j] = dp[i][j - 1] + dp[i - coins[j - 1]][j]; // 由于可以重复使用硬币所以这里是j不是j-1
+          } else {
+            dp[i][j] = dp[i][j - 1];
+          }
+        }
+      }
+
+      return dp[dp.length - 1][coins.length];
+
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   var minDistance = function (word1, word2) {
+    const len1 = word1.length + 1;
+    const len2 = word2.length + 1;
+    const dp = Array(len2).fill(0).map(a => Array(len1).fill(0));
+
+    for (let y = 0; y < len2; y++) {
+        dp[y][0] = y;
+    }
+    for (let x = 0; x < len1; x++) {
+        dp[0][x] = x;
+    }
+    for (let y = 1; y < len2; y++) {
+        for (let x = 1; x < len1; x++) {
+            dp[y][x] = Math.min(
+                dp[y][x - 1] + 1,
+                dp[y - 1][x] + 1,
+                dp[y - 1][x - 1] + (word1[x - 1] == word2[y - 1] ? 0 : 1));
+        }
+    }
+    return dp[word2.length][word1.length];
+};
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+/*
+ * @lc app=leetcode id=221 lang=javascript
+ *
+ * [221] Maximal Square
+ */
+/**
+ * @param {character[][]} matrix
+ * @return {number}
+ */
+var maximalSquare = function(matrix) {
+  let maxSideLength = 0;
+  let len = matrix.length;
+  let dp = new Array(len);
+
+  for(let i = 0; i < len; i++) {
+    dp[i] = new Array(matrix[i].length).fill(0); 
+
+    for(let j = 0; j < matrix[i].length; j++) {
+      if(matrix[i][j] === '1') {
+        if(i === 0 || j === 0) {
+          // 第一列和第一行的dp值只能为1
+          dp[i][j] = 1;
+        }else{
+          dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1;
+        }
+        maxSideLength = Math.max(maxSideLength, dp[i][j]) //挑战纪录保持者，试图更新
+      }
+    }
+  }
+  return maxSideLength * maxSideLength // 边长的平方
+};
+
+
+  </script>
+</body>
+</html>

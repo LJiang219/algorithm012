@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var rob = function(nums) {
+      let len = nums.length;
+
+      if(len == 0) return 0;
+
+      //dp 是打劫所得最高金额
+      let dp = new Array(len+1).fill(0);
+
+      dp[0] = 0;
+      dp[1] = nums[0];
+
+      //dp[i] = Math.max(dp[i-2]+nums[i-1],dp[i-1] );
+      for(let i = 2; i <= len; i++){
+        dp[i] = Math.max(dp[i-1], dp[i-2]+nums[i-1]);
+       
+      }
+
+      return dp[len];
+    }
+  </script>
+ 
+</body>
+</html>

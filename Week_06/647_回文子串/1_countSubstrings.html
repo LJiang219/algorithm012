@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {string} s
+    * @return {number}
+    */
+    // dp[i][j] = true/false 表示，字符串 i 到 j 是否是回文串
+   // 状态转移方程：
+   // 满足会文还有个细节，就是单个字符也是回文
+   // 如果 s[i] == s[j], 并且s[i-1] == s[j+1]，那么 dp[i][j] = true 或者 i - j < 2 单个字符
+   // 否则 dp[i][j] = false
+   // base case：
+   // 边界就是字符串大小，初始值全是false，因为我们要数true
+   // 枚举状态 统计true 的个数就是可以了；
+
+    var countSubstrings = function(s) {
+      let dp = new Array(s.length).fill('').map(()=>new Array(s.length).fill(false))
+      let num = 0
+      // 外层循环是计算的字符串长度
+      for (let i = 0; i < s.length; i++) {
+        // 内层循环是开始位置
+        for (let j = 0; j <= i; j++) {
+          // 在首位相等时,如果长度是1(如a)或2(如aa)，或去收尾字符串是回文
+          if (s[i] === s[j] && (i - j < 2 || dp[j + 1][i - 1])) {
+            dp[j][i] = true
+            num++
+          }
+        }
+      }
+      return num
+
+    };
+  </script>
+</body>
+</html>

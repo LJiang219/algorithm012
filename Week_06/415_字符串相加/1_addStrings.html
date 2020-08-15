@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    var addStrings = function(num1, num2) {
+      let a = num1.length, b = num2.length, result = '', tmp = 0;
+
+      while(a || b) {
+        // tmp += +num1[--a] + +num2[--b];
+        //当前位的和 = 当前位的2个数字(number)的和 + 上一次的进位
+        //考虑到 39+1 , 位数不等
+        a ? tmp += +num1[--a] : 0;
+        b ? tmp += +num2[--b] : 0;
+        result = tmp % 10 + result;  //计算当前位的值
+        if(tmp > 9) tmp = 1; 
+        else tmp = 0;
+      }
+      if(tmp) result = 1 + result;
+      return result;
+    }
+  </script>
+</body>
+</html>
