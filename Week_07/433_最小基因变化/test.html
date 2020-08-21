@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {string} start
+    * @param {string} end
+    * @param {string[]} bank
+    * @return {number}
+    */
+    var minMutation = function(start, end, bank) {
+      if(!end || bank.indexOf(end) == -1){
+            return -1;
+      }
+      // 各个通用状态对应所有单词
+      var comboDicts = {};
+      var len = start.length;
+        for(var i = 0;i<bank.length;i++){
+        for(var r = 0;r<len;r++){
+          var newWord = bank[i].substring(0,r)+'*'+bank[i].substring(r+1,len);
+          (!comboDicts[newWord]) && (comboDicts[newWord] = []);
+          comboDicts[newWord].push(bank[i]);
+        }
+      }
+        
+      function visitWord(currQueue,currVisited,othersVisited){
+        var currNode = currQueue.shift();
+        var currWord = currNode[0];
+        var currLevel = currNode[1];
+        for(var i = 0;i < len;i++){
+                // 通用状态
+          var newWord = currWord.substring(0,i)+'*'+currWord.substring(i+1,len);
+          if(newWord in comboDicts){
+            var tmpWords = comboDicts[newWord];
+            for(var z = 0;z<tmpWords.length;z++){
+                if(othersVisited[tmpWords[z]] != undefined){
+                    return currLevel + othersVisited[tmpWords[z]];
+                }
+                if(currVisited[tmpWords[z]] == undefined){
+                    currVisited[tmpWords[z]] = currLevel + 1;
+                    currQueue.push([tmpWords[z],currLevel+1]);
+                }
+            }
+          }
+        }
+        return -1;
+      }
+        
+      // Queue for BFS from beginWord
+      var queueBegin = [[start,1]];
+      // Queue for BFS from endWord
+      var queueEnd  = [[end,0]];
+      // visited begin and end
+      var visitedBegin = {};
+      visitedBegin[start] = 1;
+      var visitedEnd = {};
+      visitedEnd[end] = 0;
+      while(queueBegin.length > 0 && queueEnd.length > 0){
+        // fromBegin
+        var ans = visitWord(queueBegin,visitedBegin,visitedEnd);
+        if(ans > -1){
+            return ans;
+        }
+        // formEnd
+        ans = visitWord(queueEnd,visitedEnd,visitedBegin);
+        if(ans > -1){
+            return ans;
+        }
+      }
+      return -1;
+    };
+
+
+  </script>
+</body>
+</html>

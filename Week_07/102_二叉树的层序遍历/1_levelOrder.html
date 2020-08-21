@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+   /**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+   let result = [], queue = [root];
+   if(!root) return result;
+   
+    while(queue.length > 0){
+      const n = queue.length; 
+      let level = [];
+      for(let i=0; i < n; i++){
+          let node = queue.pop();
+          // console.log("node>>", node)
+          level.push(node.val);
+          if(node.left) queue.unshift(node.left)
+          if(node.right) queue.unshift(node.right)
+      }
+      // console.log(level)
+      result.push(level)
+    }
+       
+    return result;
+   
+   };
+  </script>
+</body>
+</html>

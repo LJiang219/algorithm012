@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var shortestPathBinaryMatrix = function (grid) {
+      let caculatef = (x, y, d) => {
+          return Math.max(d-x,d-y)
+      }
+      //使每次插入最后面的值，找到它对应的权值位置
+      let resetQueue = _ => {
+          let len = queue.length
+          if (len < 2) return
+          let item = queue[queue.length - 1]
+          for (let i = 0; i < len - 1; i++) {
+              if (queue[i][2] > item[2]) {
+                  queue.splice(i, 0, item)
+                  queue.pop()
+                  break
+              }
+          }
+      }
+      let len = grid.length
+      if (grid[0][0] == 1 || grid[len - 1][len - 1] == 1) return -1
+      if (len == 1) return 1
+      let dis = 2
+      //这里的值随便赋值都可以，因为第一个估值没意义。
+      let queue = [
+          [0, 0, 0, dis]
+      ]
+      grid[0][0] = 1
+      while (queue.length) {
+          let item = queue.shift()
+          for (let i of [
+                  [item[0] - 1, item[1]],
+                  [item[0], item[1] - 1],
+                  [item[0] + 1, item[1]],
+                  [item[0], item[1] + 1],
+                  [item[0] - 1, item[1] - 1],
+                  [item[0] - 1, item[1] + 1],
+                  [item[0] + 1, item[1] + 1],
+                  [item[0] + 1, item[1] - 1]
+              ]) {
+              // 验证合法性
+              if (i[0] >= 0 && i[0] < len && i[1] >= 0 && i[1] < len && grid[i[0]][i[1]] != 1) {
+                  // 找到对的
+                  if (i[0] == len - 1 && i[1] == len - 1) {
+                      return item[3]
+                  }
+                  // 没找到就入队列
+                  // item[3]就是层数，权值是：层数+估算函数的值
+                  i.push(caculatef(i[0], i[1], len - 1) + item[3])
+                  i.push(item[3] + 1)
+                  queue.push(i)
+                  resetQueue()
+              }
+
+          }
+          //当前节点走过之后堵上
+          grid[item[0]][item[1]] = 1
+
+      }
+      return -1
+    };
+
+  </script>
+</body>
+</html>
