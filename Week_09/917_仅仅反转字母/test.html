@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {string} S
+    * @return {string}
+    */
+
+    //  出需要反转的字母，留下位置标记，字母反转后，根据标记替代；
+    var reverseOnlyLetters = function(S) {    
+        let t = Array.from(S);
+        let p = [];
+        for(let i in t){
+            if(t[i].charCodeAt() > 64 && t[i].charCodeAt() < 91 || t[i].charCodeAt() > 96 && t[i].charCodeAt() < 123){    
+                p.push(t[i]);
+                t[i] = null;
+            }
+        };
+        p.reverse();
+        t.map((item, index) => {
+            if(item === null){
+                t[index] = p.shift();
+            }
+        });
+        return t.join('');
+    };
+
+  </script>
+</body>
+</html>

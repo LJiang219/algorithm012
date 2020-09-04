@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {string} s
+    * @param {string} t
+    * @return {boolean}
+    */
+    const isIsomorphic = (s, t) => {
+      if (s === t || s === '') return true
+      let mapS = new Map(), mapT = new Map()
+      for (let i = 0; i < s.length; i++) {
+        if (mapS.has(s[i]) || mapT.has(t[i])) {
+          if (mapS.get(s[i]) !== mapT.get(t[i])) return false
+        }
+        mapS.set(s[i], i)
+        mapT.set(t[i], i)
+      }
+      return true
+    }
+
+  </script>
+</body>
+</html>
